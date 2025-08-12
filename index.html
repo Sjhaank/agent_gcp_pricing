@@ -235,29 +235,6 @@
             text-decoration: underline;
         }
 
-        .parameters-box {
-            background: #e8f5e8;
-            border: 2px solid #4caf50;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .parameters-box h4 {
-            color: #2e7d32;
-            margin-bottom: 10px;
-        }
-
-        .parameter-item {
-            background: #c8e6c9;
-            padding: 8px 12px;
-            margin: 5px 0;
-            border-radius: 5px;
-            border-left: 3px solid #4caf50;
-            font-size: 0.9rem;
-            color: #1b5e20;
-        }
-
         @media (max-width: 968px) {
             .content {
                 grid-template-columns: 1fr;
@@ -344,10 +321,6 @@
                         <option value="1.5" selected>Standard Edition ($1.50 per 1,000 queries) - Default</option>
                         <option value="4">Enterprise Edition ($4.00 per 1,000 queries)</option>
                     </select>
-                    <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
-                        <strong>Standard:</strong> Unstructured + Structured Search | <strong>Enterprise:</strong> + Website Search + Core Generative Answers (AI Mode)
-                        <a href="https://cloud.google.com/generative-ai-app-builder/docs/about-search#search-editions" target="_blank" style="color: #4285f4; margin-left: 5px;">Learn more</a>
-                    </small>
                 </div>
 
                 <div class="input-group">
@@ -358,25 +331,16 @@
                         <option value="gemini-2.0-flash">Gemini 2.0 Flash (Fast & Efficient)</option>
                         <option value="gemini-2.5-pro">Gemini 2.5 Pro (Most Powerful - Premium)</option>
                     </select>
-                    <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
-                        💡 Flash-Lite offers the best cost efficiency for most use cases
-                    </small>
                 </div>
 
                 <div class="input-group">
-                    <label for="avgInputTokens">Average Input Tokens per Query <span style="color: #28a745; font-size: 0.85rem;">[Optional - Configurable in ADK]</span></label>
+                    <label for="avgInputTokens">Average Input Tokens per Query</label>
                     <input type="number" id="avgInputTokens" value="2000" min="100" placeholder="Query + retrieved context">
-                    <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
-                        🔧 Control via search result limits and context assembly in your ADK code
-                    </small>
                 </div>
 
                 <div class="input-group">
-                    <label for="avgOutputTokens">Average Output Tokens per Response <span style="color: #28a745; font-size: 0.85rem;">[Optional - Configurable in ADK]</span></label>
+                    <label for="avgOutputTokens">Average Output Tokens per Response</label>
                     <input type="number" id="avgOutputTokens" value="800" min="50" placeholder="Agent response length">
-                    <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
-                        🔧 Control via <code>max_output_tokens</code> in GenerateContentConfig
-                    </small>
                 </div>
 
                 <div class="input-group">
@@ -386,146 +350,16 @@
                         <option value="agent-engine">Vertex AI Agent Engine (Managed) - Paid</option>
                         <option value="cloud-run">Cloud Run (Custom) - Paid</option>
                     </select>
-                    <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
-                        💡 Local development is free and recommended for testing
-                    </small>
                 </div>
 
                 <div class="input-group" id="agentEngineSettings" style="display: none;">
-                    <label for="vcpuHours">Monthly vCPU Hours (Agent Engine) <span style="color: #ff6b35; font-size: 0.85rem;">[Paid Only]</span></label>
+                    <label for="vcpuHours">Monthly vCPU Hours (Agent Engine)</label>
                     <input type="number" id="vcpuHours" value="720" min="1" placeholder="720 = 1 vCPU running 24/7">
-                    <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
-                        ⚙️ 720 hours = 1 vCPU running continuously for a month
-                    </small>
                 </div>
 
                 <div class="input-group" id="memorySettings" style="display: none;">
-                    <label for="memoryGiBHours">Monthly Memory GiB Hours (Agent Engine) <span style="color: #ff6b35; font-size: 0.85rem;">[Paid Only]</span></label>
+                    <label for="memoryGiBHours">Monthly Memory GiB Hours (Agent Engine)</label>
                     <input type="number" id="memoryGiBHours" value="1440" min="1" placeholder="1440 = 2 GiB running 24/7">
-                    <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
-                        ⚙️ 1440 = 2 GiB memory running continuously for a month
-                    </small>
-                </div>
-
-                <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
-                    <h4 style="color: #856404; margin-bottom: 15px;">💰 Cost Impact Analysis of Calculator Parameters</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
-                        <div style="background: #d4edda; padding: 12px; border-radius: 5px; border-left: 4px solid #28a745;">
-                            <h5 style="color: #155724; margin-bottom: 8px;">✅ DIRECT Cost Impact</h5>
-                            <ul style="color: #155724; margin-left: 15px; font-size: 0.9rem;">
-                                <li><strong>Website Pages in Data Store</strong> - Storage costs ($5/GiB)</li>
-                                <li><strong>Monthly Agent Queries</strong> - Search & LLM costs</li>
-                                <li><strong>Search Edition</strong> - $1.50 vs $4.00 per 1K queries</li>
-                                <li><strong>LLM Model</strong> - 90x price difference between models</li>
-                                <li><strong>Input/Output Tokens</strong> - Direct LLM pricing</li>
-                                <li><strong>Deployment Option</strong> - Free vs paid runtime</li>
-                                <li><strong>vCPU/Memory Hours</strong> - Agent Engine costs</li>
-                            </ul>
-                        </div>
-                        <div style="background: #f8d7da; padding: 12px; border-radius: 5px; border-left: 4px solid #dc3545;">
-                            <h5 style="color: #721c24; margin-bottom: 8px;">❌ NO Direct Cost Impact</h5>
-                            <ul style="color: #721c24; margin-left: 15px; font-size: 0.9rem;">
-                                <li><strong>Average Page Size</strong> - Fixed 500 KiB allocation*</li>
-                            </ul>
-                            <p style="font-size: 0.8rem; margin-top: 8px; font-style: italic;">
-                                *Google allocates 500 KiB per page regardless of actual size
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
-                    <h4 style="color: #1565c0; margin-bottom: 15px;">📖 Parameter Descriptions & Cost Details</h4>
-                    
-                    <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
-                        <h5 style="color: #1565c0; margin-bottom: 8px;">📦 Website Pages in Data Store</h5>
-                        <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
-                            Total number of web pages crawled and indexed in your Vertex AI Data Store. Google allocates exactly 500 KiB (0.000488 GiB) per page for storage calculations, regardless of actual page size.
-                        </p>
-                        <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
-                            <strong>💰 Cost Impact:</strong> Storage cost = Pages × 500 KiB ÷ 1,048,576 × $5/GiB/month
-                            <br><strong>Example:</strong> 10,000 pages = 4.88 GiB = $24.41/month
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
-                        <h5 style="color: #1565c0; margin-bottom: 8px;">📏 Average Page Size (KB)</h5>
-                        <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
-                            The typical size of pages on your website. This parameter is for reference only and does NOT affect pricing. Google uses a fixed 500 KiB allocation per page regardless of actual content size.
-                        </p>
-                        <div style="background: #ffecb3; padding: 8px; border-radius: 4px;">
-                            <strong>⚠️ No Cost Impact:</strong> Whether your pages are 50 KB or 2 MB, Google bills the same 500 KiB per page
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
-                        <h5 style="color: #1565c0; margin-bottom: 8px;">🔍 Monthly Agent Queries</h5>
-                        <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
-                            Number of user queries your ADK agent processes per month. Each query triggers: (1) Data Store search, (2) LLM processing to generate response. This is the primary usage driver.
-                        </p>
-                        <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
-                            <strong>💰 Cost Impact:</strong> Search cost + LLM cost per query
-                            <br><strong>Example:</strong> 25,000 queries = $100 search + $262 LLM = $362/month
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
-                        <h5 style="color: #1565c0; margin-bottom: 8px;">🎯 Search Edition</h5>
-                        <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
-                            <strong>Standard ($1.50/1K):</strong> Basic search with unstructured + structured data support
-                            <br><strong>Enterprise ($4.00/1K):</strong> Adds website search optimization + Core Generative Answers (AI Mode)
-                        </p>
-                        <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
-                            <strong>💰 Cost Impact:</strong> 2.67x price difference between editions
-                            <br><strong>Example:</strong> 25K queries: Standard = $37.50 vs Enterprise = $100
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
-                        <h5 style="color: #1565c0; margin-bottom: 8px;">🧠 LLM Model for ADK Agent Responses</h5>
-                        <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
-                            The Gemini model your ADK agent uses to generate responses. Set via <code>model="gemini-2.5-flash"</code> in your Agent() constructor.
-                        </p>
-                        <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
-                            <strong>💰 Cost Impact:</strong> Massive differences in per-token pricing
-                            <br><strong>Flash-Lite:</strong> $1.00/1M output tokens | <strong>2.5 Pro:</strong> $90/1M output tokens (90x difference!)
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
-                        <h5 style="color: #1565c0; margin-bottom: 8px;">📥📤 Average Input/Output Tokens per Query</h5>
-                        <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
-                            <strong>Input:</strong> User query + retrieved context from Data Store (controllable via ADK)
-                            <br><strong>Output:</strong> Generated response length (controllable via <code>max_output_tokens</code> in ADK)
-                        </p>
-                        <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
-                            <strong>💰 Cost Impact:</strong> Direct multiplication with model pricing
-                            <br><strong>Control:</strong> Set limits via GenerateContentConfig in ADK code
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
-                        <h5 style="color: #1565c0; margin-bottom: 8px;">🚀 Deployment Option</h5>
-                        <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
-                            <strong>Local:</strong> Development only, runs on your machine (FREE)
-                            <br><strong>Agent Engine:</strong> Managed runtime with auto-scaling ($0.00994/vCPU-hr + $0.0105/GiB-hr)
-                            <br><strong>Cloud Run:</strong> Custom containerized deployment (separate pricing)
-                        </p>
-                        <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
-                            <strong>💰 Cost Impact:</strong> $0 (local) vs ~$22-50+/month (managed runtime)
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
-                        <h5 style="color: #1565c0; margin-bottom: 8px;">⚙️ Monthly vCPU Hours & Memory GiB Hours</h5>
-                        <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
-                            Compute resources for Vertex AI Agent Engine deployment. 720 vCPU hours = 1 vCPU running 24/7 for a month. 1,440 GiB hours = 2 GiB RAM running 24/7 for a month.
-                        </p>
-                        <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
-                            <strong>💰 Cost Impact:</strong> vCPU: $0.00994/hour | Memory: $0.0105/hour
-                            <br><strong>Example:</strong> 720 vCPU + 1440 GiB hours = $22.25/month
-                        </div>
-                    </div>
                 </div>
 
                 <div class="info-box">
@@ -577,11 +411,11 @@
                     </div>
                     <div class="calculation-step">
                         <span>Query Rate:</span>
-                        <span id="queryRateCalc">$4.00/1,000</span>
+                        <span id="queryRateCalc">$1.50/1,000</span>
                     </div>
                     <div class="calculation-step">
                         <span>Query Cost:</span>
-                        <span id="searchCostCalc">$100.00/month</span>
+                        <span id="searchCostCalc">$37.50/month</span>
                     </div>
                 </div>
 
@@ -669,18 +503,9 @@
                     <div class="price" id="finalPrice">$94.41/month</div>
                     <p>Intelligent Agent: Storage + Search + Reasoning + Runtime</p>
                 </div>
-
-                <div class="reference-links" style="margin-top: 20px;">
-                    <h4>📚 ADK Implementation Resources:</h4>
-                    <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/agent-development-kit/quickstart" target="_blank">🛠️ ADK Quickstart Guide</a>
-                    <a href="https://github.com/google/adk-python" target="_blank">💻 ADK Python GitHub</a>
-                    <a href="https://cloud.google.com/generative-ai-app-builder/docs/create-data-store-es" target="_blank">📦 Setup Website Data Store</a>
-                    <a href="https://google.github.io/adk-docs/deploy/agent-engine/" target="_blank">🚀 Deploy to Agent Engine</a>
-                </div>
             </div>
         </div>
 
-        <!-- AI Agent Flow Explanation -->
         <div class="agent-flow">
             <h3 style="color: #2e7d32; margin-bottom: 15px;">🔄 How Your Intelligent AI Agent Works (Query Processing Flow)</h3>
             <div class="flow-step">
@@ -713,11 +538,133 @@
             </p>
         </div>
 
-        <!-- Parameter Control Breakdown by Stage -->
+        <!-- Cost Impact Analysis -->
+        <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 20px; margin: 20px 30px;">
+            <h4 style="color: #856404; margin-bottom: 15px;">💰 Cost Impact Analysis of Calculator Parameters</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                <div style="background: #d4edda; padding: 12px; border-radius: 5px; border-left: 4px solid #28a745;">
+                    <h5 style="color: #155724; margin-bottom: 8px;">✅ DIRECT Cost Impact</h5>
+                    <ul style="color: #155724; margin-left: 15px; font-size: 0.9rem;">
+                        <li><strong>Website Pages in Data Store</strong> - Storage costs ($5/GiB)</li>
+                        <li><strong>Monthly Agent Queries</strong> - Search & LLM costs</li>
+                        <li><strong>Search Edition</strong> - $1.50 vs $4.00 per 1K queries</li>
+                        <li><strong>LLM Model</strong> - 90x price difference between models</li>
+                        <li><strong>Input/Output Tokens</strong> - Direct LLM pricing</li>
+                        <li><strong>Deployment Option</strong> - Free vs paid runtime</li>
+                        <li><strong>vCPU/Memory Hours</strong> - Agent Engine costs</li>
+                    </ul>
+                </div>
+                <div style="background: #f8d7da; padding: 12px; border-radius: 5px; border-left: 4px solid #dc3545;">
+                    <h5 style="color: #721c24; margin-bottom: 8px;">❌ NO Direct Cost Impact</h5>
+                    <ul style="color: #721c24; margin-left: 15px; font-size: 0.9rem;">
+                        <li><strong>Average Page Size</strong> - Fixed 500 KiB allocation*</li>
+                    </ul>
+                    <p style="font-size: 0.8rem; margin-top: 8px; font-style: italic;">
+                        *Google allocates 500 KiB per page regardless of actual size
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parameter Descriptions -->
+        <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 8px; padding: 20px; margin: 20px 30px;">
+            <h4 style="color: #1565c0; margin-bottom: 15px;">📖 Parameter Descriptions & Cost Details</h4>
+            
+            <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
+                <h5 style="color: #1565c0; margin-bottom: 8px;">📦 Website Pages in Data Store</h5>
+                <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
+                    Total number of web pages crawled and indexed in your Vertex AI Data Store. Google allocates exactly 500 KiB (0.000488 GiB) per page for storage calculations, regardless of actual page size.
+                </p>
+                <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
+                    <strong>💰 Cost Impact:</strong> Storage cost = Pages × 500 KiB ÷ 1,048,576 × $5/GiB/month
+                    <br><strong>Example:</strong> 10,000 pages = 4.88 GiB = $24.41/month
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
+                <h5 style="color: #1565c0; margin-bottom: 8px;">📏 Average Page Size (KB)</h5>
+                <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
+                    The typical size of pages on your website. This parameter is for reference only and does NOT affect pricing. Google uses a fixed 500 KiB allocation per page regardless of actual content size.
+                </p>
+                <div style="background: #ffecb3; padding: 8px; border-radius: 4px;">
+                    <strong>⚠️ No Cost Impact:</strong> Whether your pages are 50 KB or 2 MB, Google bills the same 500 KiB per page
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
+                <h5 style="color: #1565c0; margin-bottom: 8px;">🔍 Monthly Agent Queries</h5>
+                <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
+                    Number of user queries your ADK agent processes per month. Each query triggers: (1) Data Store search, (2) LLM processing to generate response. This is the primary usage driver.
+                </p>
+                <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
+                    <strong>💰 Cost Impact:</strong> Search cost + LLM cost per query
+                    <br><strong>Example:</strong> 25,000 queries = $37.50 search + $20 LLM = $57.50/month
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
+                <h5 style="color: #1565c0; margin-bottom: 8px;">🎯 Search Edition</h5>
+                <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
+                    <strong>Standard ($1.50/1K):</strong> Basic search with unstructured + structured data support
+                    <br><strong>Enterprise ($4.00/1K):</strong> Adds website search optimization + Core Generative Answers (AI Mode)
+                </p>
+                <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
+                    <strong>💰 Cost Impact:</strong> 2.67x price difference between editions
+                    <br><strong>Example:</strong> 25K queries: Standard = $37.50 vs Enterprise = $100
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
+                <h5 style="color: #1565c0; margin-bottom: 8px;">🧠 LLM Model for ADK Agent Responses</h5>
+                <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
+                    The Gemini model your ADK agent uses to generate responses. Set via <code>model="gemini-2.5-flash"</code> in your Agent() constructor.
+                </p>
+                <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
+                    <strong>💰 Cost Impact:</strong> Massive differences in per-token pricing
+                    <br><strong>Flash-Lite:</strong> $1.00/1M output tokens | <strong>2.5 Pro:</strong> $90/1M output tokens (90x difference!)
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
+                <h5 style="color: #1565c0; margin-bottom: 8px;">📥📤 Average Input/Output Tokens per Query</h5>
+                <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
+                    <strong>Input:</strong> User query + retrieved context from Data Store (controllable via ADK)
+                    <br><strong>Output:</strong> Generated response length (controllable via <code>max_output_tokens</code> in ADK)
+                </p>
+                <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
+                    <strong>💰 Cost Impact:</strong> Direct multiplication with model pricing
+                    <br><strong>Control:</strong> Set limits via GenerateContentConfig in ADK code
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
+                <h5 style="color: #1565c0; margin-bottom: 8px;">🚀 Deployment Option</h5>
+                <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
+                    <strong>Local:</strong> Development only, runs on your machine (FREE)
+                    <br><strong>Agent Engine:</strong> Managed runtime with auto-scaling ($0.00994/vCPU-hr + $0.0105/GiB-hr)
+                    <br><strong>Cloud Run:</strong> Custom containerized deployment (separate pricing)
+                </p>
+                <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
+                    <strong>💰 Cost Impact:</strong> $0 (local) vs ~$22-50+/month (managed runtime)
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px; padding: 12px; background: rgba(33, 150, 243, 0.1); border-radius: 5px;">
+                <h5 style="color: #1565c0; margin-bottom: 8px;">⚙️ Monthly vCPU Hours & Memory GiB Hours</h5>
+                <p style="color: #424242; margin-bottom: 8px; font-size: 0.9rem;">
+                    Compute resources for Vertex AI Agent Engine deployment. 720 vCPU hours = 1 vCPU running 24/7 for a month. 1,440 GiB hours = 2 GiB RAM running 24/7 for a month.
+                </p>
+                <div style="background: #c8e6c9; padding: 8px; border-radius: 4px;">
+                    <strong>💰 Cost Impact:</strong> vCPU: $0.00994/hour | Memory: $0.0105/hour
+                    <br><strong>Example:</strong> 720 vCPU + 1440 GiB hours = $22.25/month
+                </div>
+            </div>
+        </div>
+
+        <!-- Parameter Control Breakdown -->
         <div style="background: #f8f9fa; border: 2px solid #6c757d; border-radius: 10px; padding: 25px; margin: 20px 30px;">
             <h3 style="color: #495057; margin-bottom: 20px;">🎯 Parameter Control Throughout ADK + Data Store Workflow</h3>
             
-            <!-- Stage 1: Data Store Setup -->
             <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; margin: 15px 0; border-radius: 5px;">
                 <h4 style="color: #1565c0; margin-bottom: 10px;">📦 Stage 1: Data Store Setup & Website Crawling</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -747,7 +694,6 @@
                 </div>
             </div>
 
-            <!-- Stage 2: ADK Agent Configuration -->
             <div style="background: #e8f5e8; border-left: 4px solid #4caf50; padding: 15px; margin: 15px 0; border-radius: 5px;">
                 <h4 style="color: #2e7d32; margin-bottom: 10px;">🤖 Stage 2: ADK Agent Configuration</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -778,7 +724,6 @@
                 </div>
             </div>
 
-            <!-- Stage 3: Query Processing -->
             <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0; border-radius: 5px;">
                 <h4 style="color: #ef6c00; margin-bottom: 10px;">🔍 Stage 3: Query Processing & Data Store Search</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -807,7 +752,6 @@
                 </div>
             </div>
 
-            <!-- Stage 4: LLM Processing -->
             <div style="background: #fce4ec; border-left: 4px solid #e91e63; padding: 15px; margin: 15px 0; border-radius: 5px;">
                 <h4 style="color: #c2185b; margin-bottom: 10px;">🧠 Stage 4: LLM Processing & Response Generation</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -837,7 +781,6 @@
                 </div>
             </div>
 
-            <!-- Stage 5: Deployment & Runtime -->
             <div style="background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 15px; margin: 15px 0; border-radius: 5px;">
                 <h4 style="color: #7b1fa2; margin-bottom: 10px;">⚙️ Stage 5: Deployment & Runtime (Agent Engine)</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -867,7 +810,6 @@
                 </div>
             </div>
 
-            <!-- Summary Section -->
             <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 8px; padding: 20px; margin-top: 20px;">
                 <h4 style="color: #1565c0; margin-bottom: 15px;">📋 Cost Control Summary</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -919,31 +861,18 @@
                         <li>Resets daily</li>
                     </ul>
                 </div>
-                <div>
-                    <h4 style="color: #388e3c; margin-bottom: 8px;">ADK Framework</h4>
-                    <ul style="color: #424242; margin-left: 20px;">
-                        <li><strong>ADK framework FREE</strong></li>
-                        <li><strong>Local development FREE</strong></li>
-                        <li><strong>Multi-agent orchestration FREE</strong></li>
-                        <li>Pay only for underlying services</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
-        // Pricing constants from official Google documentation (August 2025)
-        const STORAGE_RATE_PER_GIB = 5.00;
-        const STORAGE_PER_PAGE_KIB = 500;
-        const KIB_TO_GIB = 1024 * 1024;
+        // Pricing constants
+        var STORAGE_RATE_PER_GIB = 5.00;
+        var STORAGE_PER_PAGE_KIB = 500;
+        var KIB_TO_GIB = 1024 * 1024;
+        var AGENT_ENGINE_VCPU_RATE = 0.00994;
+        var AGENT_ENGINE_MEMORY_RATE = 0.0105;
 
-        // Agent Engine pricing from search results
-        const AGENT_ENGINE_VCPU_RATE = 0.00994; // $0.00994 per vCPU hour
-        const AGENT_ENGINE_MEMORY_RATE = 0.0105; // $0.0105 per GiB hour
-
-        // Latest Gemini pricing per 1M tokens (August 2025)
-        const GEMINI_PRICING = {
+        // Gemini pricing per 1M tokens
+        var GEMINI_PRICING = {
             'gemini-2.5-flash': { input: 1.75, output: 8.75, name: 'Gemini 2.5 Flash' },
             'gemini-2.5-pro': { input: 9.00, output: 90.00, name: 'Gemini 2.5 Pro' },
             'gemini-2.0-flash': { input: 0.50, output: 2.00, name: 'Gemini 2.0 Flash' },
@@ -952,78 +881,79 @@
 
         function calculateAgentCosts() {
             try {
-                const pages = parseInt(document.getElementById('websitePages').value) || 0;
-                const monthlyQueries = parseInt(document.getElementById('monthlyAgentQueries').value) || 0;
-                const queryRate = parseFloat(document.getElementById('searchEdition').value) || 4;
-                const llmModel = document.getElementById('llmModel').value;
-                const inputTokens = parseInt(document.getElementById('avgInputTokens').value) || 0;
-                const outputTokens = parseInt(document.getElementById('avgOutputTokens').value) || 0;
-                const deploymentOption = document.getElementById('deploymentOption').value;
-                const vcpuHours = parseInt(document.getElementById('vcpuHours').value) || 0;
-                const memoryGiBHours = parseInt(document.getElementById('memoryGiBHours').value) || 0;
+                // Get input values
+                var pages = parseInt(document.getElementById('websitePages').value) || 0;
+                var monthlyQueries = parseInt(document.getElementById('monthlyAgentQueries').value) || 0;
+                var queryRate = parseFloat(document.getElementById('searchEdition').value) || 1.5;
+                var llmModel = document.getElementById('llmModel').value;
+                var inputTokens = parseInt(document.getElementById('avgInputTokens').value) || 0;
+                var outputTokens = parseInt(document.getElementById('avgOutputTokens').value) || 0;
+                var deploymentOption = document.getElementById('deploymentOption').value;
+                var vcpuHours = parseInt(document.getElementById('vcpuHours').value) || 0;
+                var memoryGiBHours = parseInt(document.getElementById('memoryGiBHours').value) || 0;
 
                 // Calculate storage cost
-                const totalStorageKiB = pages * STORAGE_PER_PAGE_KIB;
-                const totalStorageGiB = totalStorageKiB / KIB_TO_GIB;
-                const monthlyStorageCost = totalStorageGiB * STORAGE_RATE_PER_GIB;
+                var totalStorageKiB = pages * STORAGE_PER_PAGE_KIB;
+                var totalStorageGiB = totalStorageKiB / KIB_TO_GIB;
+                var monthlyStorageCost = totalStorageGiB * STORAGE_RATE_PER_GIB;
                 
                 // Calculate search cost
-                const monthlySearchCost = (monthlyQueries / 1000) * queryRate;
+                var monthlySearchCost = (monthlyQueries / 1000) * queryRate;
                 
                 // Calculate LLM costs
-                const totalInputTokensPerMonth = (monthlyQueries * inputTokens) / 1000000; // Convert to millions
-                const totalOutputTokensPerMonth = (monthlyQueries * outputTokens) / 1000000;
+                var totalInputTokensPerMonth = (monthlyQueries * inputTokens) / 1000000;
+                var totalOutputTokensPerMonth = (monthlyQueries * outputTokens) / 1000000;
                 
-                const modelPricing = GEMINI_PRICING[llmModel];
-                const inputCost = totalInputTokensPerMonth * modelPricing.input;
-                const outputCost = totalOutputTokensPerMonth * modelPricing.output;
-                const totalLLMCost = inputCost + outputCost;
+                var modelPricing = GEMINI_PRICING[llmModel];
+                var inputCost = totalInputTokensPerMonth * modelPricing.input;
+                var outputCost = totalOutputTokensPerMonth * modelPricing.output;
+                var totalLLMCost = inputCost + outputCost;
                 
                 // Calculate Agent Engine costs
-                let agentEngineCost = 0;
-                let deploymentText = 'Local Development';
+                var agentEngineCost = 0;
+                var deploymentText = 'Local Development';
                 if (deploymentOption === 'agent-engine') {
                     agentEngineCost = (vcpuHours * AGENT_ENGINE_VCPU_RATE) + (memoryGiBHours * AGENT_ENGINE_MEMORY_RATE);
                     deploymentText = 'Vertex AI Agent Engine';
                 } else if (deploymentOption === 'cloud-run') {
                     deploymentText = 'Cloud Run (Custom)';
-                    agentEngineCost = 0; // Simplified - Cloud Run has different pricing
+                    agentEngineCost = 0;
                 }
                 
                 // Total cost
-                const totalMonthlyCost = monthlyStorageCost + monthlySearchCost + totalLLMCost + agentEngineCost;
+                var totalMonthlyCost = monthlyStorageCost + monthlySearchCost + totalLLMCost + agentEngineCost;
 
-                // Update display
+                // Update display elements
                 document.getElementById('totalPagesCalc').textContent = pages.toLocaleString();
                 document.getElementById('totalStorageCalc').textContent = totalStorageGiB.toFixed(2) + ' GiB';
-                document.getElementById('storageCostCalc').textContent = ' + monthlyStorageCost.toFixed(2) + '/month';
+                document.getElementById('storageCostCalc').textContent = '$' + monthlyStorageCost.toFixed(2) + '/month';
                 
                 document.getElementById('totalQueriesCalc').textContent = monthlyQueries.toLocaleString();
-                document.getElementById('queryRateCalc').textContent = ' + queryRate.toFixed(2) + '/1,000';
-                document.getElementById('searchCostCalc').textContent = ' + monthlySearchCost.toFixed(2) + '/month';
+                document.getElementById('queryRateCalc').textContent = '$' + queryRate.toFixed(2) + '/1,000';
+                document.getElementById('searchCostCalc').textContent = '$' + monthlySearchCost.toFixed(2) + '/month';
                 
                 document.getElementById('deploymentTypeCalc').textContent = deploymentText;
                 document.getElementById('vcpuHoursCalc').textContent = vcpuHours.toLocaleString() + ' hours';
                 document.getElementById('memoryHoursCalc').textContent = memoryGiBHours.toLocaleString() + ' GiB hours';
-                document.getElementById('agentEngineCostCalc').textContent = ' + agentEngineCost.toFixed(2) + '/month';
+                document.getElementById('agentEngineCostCalc').textContent = '$' + agentEngineCost.toFixed(2) + '/month';
                 
                 document.getElementById('modelNameCalc').textContent = modelPricing.name;
                 document.getElementById('totalInputTokens').textContent = (totalInputTokensPerMonth * 1000000).toLocaleString() + ' tokens';
                 document.getElementById('totalOutputTokens').textContent = (totalOutputTokensPerMonth * 1000000).toLocaleString() + ' tokens';
-                document.getElementById('inputCostCalc').textContent = ' + inputCost.toFixed(2);
-                document.getElementById('outputCostCalc').textContent = ' + outputCost.toFixed(2);
-                document.getElementById('llmTotalCalc').textContent = ' + totalLLMCost.toFixed(2) + '/month';
+                document.getElementById('inputCostCalc').textContent = '$' + inputCost.toFixed(2);
+                document.getElementById('outputCostCalc').textContent = '$' + outputCost.toFixed(2);
+                document.getElementById('llmTotalCalc').textContent = '$' + totalLLMCost.toFixed(2) + '/month';
                 
-                document.getElementById('storageCost').textContent = ' + monthlyStorageCost.toFixed(2);
-                document.getElementById('queryCost').textContent = ' + monthlySearchCost.toFixed(2);
-                document.getElementById('llmCost').textContent = ' + totalLLMCost.toFixed(2);
-                document.getElementById('agentEngineCost').textContent = ' + agentEngineCost.toFixed(2);
-                document.getElementById('totalCost').textContent = ' + totalMonthlyCost.toFixed(2);
-                document.getElementById('finalPrice').textContent = ' + totalMonthlyCost.toFixed(2) + '/month';
+                document.getElementById('storageCost').textContent = '$' + monthlyStorageCost.toFixed(2);
+                document.getElementById('queryCost').textContent = '$' + monthlySearchCost.toFixed(2);
+                document.getElementById('llmCost').textContent = '$' + totalLLMCost.toFixed(2);
+                document.getElementById('agentEngineCost').textContent = '$' + agentEngineCost.toFixed(2);
+                document.getElementById('totalCost').textContent = '$' + totalMonthlyCost.toFixed(2);
+                document.getElementById('finalPrice').textContent = '$' + totalMonthlyCost.toFixed(2) + '/month';
 
-                // Show/hide Agent Engine settings based on deployment option
-                const agentEngineSettings = document.getElementById('agentEngineSettings');
-                const memorySettings = document.getElementById('memorySettings');
+                // Show/hide Agent Engine settings
+                var agentEngineSettings = document.getElementById('agentEngineSettings');
+                var memorySettings = document.getElementById('memorySettings');
                 if (deploymentOption === 'agent-engine') {
                     agentEngineSettings.style.display = 'block';
                     memorySettings.style.display = 'block';
@@ -1038,16 +968,17 @@
 
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            const inputs = ['websitePages', 'avgPageSize', 'monthlyAgentQueries', 'searchEdition', 'llmModel', 'avgInputTokens', 'avgOutputTokens', 'deploymentOption', 'vcpuHours', 'memoryGiBHours'];
+            var inputs = ['websitePages', 'monthlyAgentQueries', 'searchEdition', 'llmModel', 'avgInputTokens', 'avgOutputTokens', 'deploymentOption', 'vcpuHours', 'memoryGiBHours'];
             
-            inputs.forEach(function(inputId) {
-                const element = document.getElementById(inputId);
+            for (var i = 0; i < inputs.length; i++) {
+                var element = document.getElementById(inputs[i]);
                 if (element) {
                     element.addEventListener('input', calculateAgentCosts);
                     element.addEventListener('change', calculateAgentCosts);
                 }
-            });
+            }
             
+            // Initial calculation
             calculateAgentCosts();
         });
     </script>
